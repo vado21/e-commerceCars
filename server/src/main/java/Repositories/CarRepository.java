@@ -19,6 +19,17 @@ import org.springframework.stereotype.Service;
 @Service
 public interface CarRepository extends MongoRepository<Car, String>{
     
+    
     @Query("{ '_class' : 'models.Car' }")
     List<Car> getOnlyCars ();
+    
+    @Query("{ '_class' : 'models.Luxury' }")
+    List<Car> getOnlyLuxury ();
+    
+    @Query("{ '_class' : 'models.Armored' }")
+    List<Car> getOnlyArmored ();
+
+    @Query("{ '_class' : 'models.Commercial' }")
+    List<Car> getOnlyCommercial ();
+    
 }

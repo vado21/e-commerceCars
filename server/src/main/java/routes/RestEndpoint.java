@@ -10,8 +10,8 @@ package routes;
  * @author ricardocazares
  */
 public interface RestEndpoint {
-
-    Object index();
+    
+    Object list(String query);
 
     Object delete(String id);
 
