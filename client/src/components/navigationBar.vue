@@ -12,9 +12,10 @@
     >
       <v-list>
         <v-list-item
-          v-for="([icon, text], i) in items"
+          v-for="([icon, text, path], i) in items"
           :key="i"
           link
+          :to="path"
         >
           <v-list-item-icon>
             <v-icon>{{ icon }}</v-icon>
@@ -23,6 +24,7 @@
           <v-list-item-content>
             <v-list-item-title>{{ text }}</v-list-item-title>
           </v-list-item-content>
+          
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
@@ -34,9 +36,8 @@
   export default {
     data: () => ({
       items: [
-        ['mdi-email', 'Carros'],
-        ['mdi-account-supervisor-circle', 'Pedidos'],
-        ['mdi-clock-start', 'Clock-in'],
+        ['mdi-email', 'Carros','/Cars'],
+        ['mdi-account-supervisor-circle', 'Pedidos','/Pedidos'],
       ],
     }),
   }
