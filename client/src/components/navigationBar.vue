@@ -36,6 +36,7 @@
   export default {
     data: () => ({
       items: [
+        ['mdi-email', 'Galería','/Gallery'],
         ['mdi-email', 'Carros','/Cars'],
         ['mdi-account-supervisor-circle', 'Pedidos','/Pedidos'],
       ],

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Cars from '../views/Cars.vue'
+import Gallery from '../views/Gallery.vue'
 
 
 Vue.use(VueRouter)
@@ -20,7 +21,22 @@ const routes = [
       requiresAuth: true,
     },
     subMenu: [],
-  }
+  },
+  {
+    path: '/Gallery',
+    name: 'Galería',
+    icon: 'mdi-home',
+    id: 0,
+    component: Gallery,
+    visible: true,
+    user: true,
+    menu: true,
+    title: true,
+    meta: {
+      requiresAuth: false,
+    },
+    subMenu: [],
+  },
 /*
   {
     path: '/:catchAll(.*)*',
