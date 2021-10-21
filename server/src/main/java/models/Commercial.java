@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @author ricardocazares
  */
 @Document("Car")
-public class Commercial {
+public class Commercial extends Car {
     float spaceVolume;
     float maxWeightCargo;
     String motor;
