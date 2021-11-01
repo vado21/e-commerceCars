@@ -5,8 +5,11 @@
  */
 package Repositories;
 
-import models.Luxury;
+import java.util.List;
+import models.Car;
+import models.Reservation;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,6 +17,11 @@ import org.springframework.stereotype.Service;
  * @author ricardocazares
  */
 @Service
-public interface LuxuryRepository extends MongoRepository<Luxury, String>{
+public interface ReservationRepository extends MongoRepository<Reservation, String>{
     
+    @Query("{ 'status' : 'new' }")
+    List<Reservation> getNew ();
+    
+    @Query("{ 'status' : 'complete' }")
+    List<Reservation> getComplete ();
 }

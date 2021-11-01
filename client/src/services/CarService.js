@@ -7,7 +7,7 @@ const valid_query_list = {
 	"luxury" : 2,
 	"armored" : 3,
 	"commercial" : 4,
-	"" : 5
+	"all" : 5
 }
 
 class CarService {

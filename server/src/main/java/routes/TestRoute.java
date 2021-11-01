@@ -5,8 +5,7 @@
  */
 package routes;
 
-import Repositories.TestRepository;
-import models.test;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,20 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
  */
  @RestController
 public class TestRoute {
-     
-    @Autowired
-    TestRepository repo;
-     
-    @GetMapping("/status")
+          
+    @GetMapping("/")
     public String index (){
         return "hello world";
     }
-    
-    @GetMapping("/obtain")
-    public void index2 (){
-        
-        test t = new test("myname2",2012);
-        repo.save(t);
-         
-    }
+   
 }
