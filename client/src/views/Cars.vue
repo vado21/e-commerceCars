@@ -7,7 +7,7 @@
         
         target="noUpperCase"
         color="primary"
-        @click="newUser()"
+        @click="newCar()"
     >
       <v-icon smal left>
         mdi-plus
@@ -38,6 +38,15 @@
           class="elevation-3"
         >
         <template v-slot:item.actions="{ item }">
+            <v-btn
+              class="ma-2"
+              color="secondary"
+              @click="editItem(item)"
+              icon
+            >
+              <v-icon>mdi-pencil</v-icon>
+            </v-btn>
+            
             <v-btn
               class="ma-2"
               color="error"
@@ -86,6 +95,9 @@
           });
         },
     methods: {
+      newCar(){
+        this.$router.push("/addCar");
+      },
       getCars(){
         this.$http.get("car?filter=all")
           .then((result) => {
@@ -94,6 +106,9 @@
           .catch((error) => {
             
           });
+      },
+      editItem(item){
+        this.$router.push("/addCar?id="+item.id);
       },
       deleteItem(item){
         this.$http.delete("car/"+item.id)

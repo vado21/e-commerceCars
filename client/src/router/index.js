@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Cars from '../views/Cars.vue'
 import Gallery from '../views/Gallery.vue'
+import Addcar from '../views/AddCar.vue'
+
 
 
 Vue.use(VueRouter)
@@ -28,6 +30,21 @@ const routes = [
     icon: 'mdi-home',
     id: 0,
     component: Gallery,
+    visible: true,
+    user: true,
+    menu: true,
+    title: true,
+    meta: {
+      requiresAuth: false,
+    },
+    subMenu: [],
+  },
+  {
+    path: '/Addcar',
+    name: 'Agregar Carro',
+    icon: 'mdi-home',
+    id: 0,
+    component: Addcar,
     visible: true,
     user: true,
     menu: true,

@@ -1,13 +1,13 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:4000';
+axios.defaults.baseURL = 'http://52d8-2806-109f-13-3016-e9e0-65ed-aed7-8efa.ngrok.io/';
 
 const valid_query_list = {
 	"car" : 1,
 	"luxury" : 2,
 	"armored" : 3,
 	"commercial" : 4,
-	"all" : 5
+	"" : 5
 }
 
 class CarService {
