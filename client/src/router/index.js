@@ -3,8 +3,8 @@ import VueRouter from 'vue-router'
 import Cars from '../views/Cars.vue'
 import Gallery from '../views/Gallery.vue'
 import Addcar from '../views/AddCar.vue'
-
-
+import Detail from '../views/Detail.vue'
+import Login from '../views/Login.vue'
 
 Vue.use(VueRouter)
 
@@ -25,7 +25,7 @@ const routes = [
     subMenu: [],
   },
   {
-    path: '/Gallery',
+    path: '/',
     name: 'Galería',
     icon: 'mdi-home',
     id: 0,
@@ -41,10 +41,40 @@ const routes = [
   },
   {
     path: '/Addcar',
-    name: 'Agregar Carro',
+    name: 'Addcar',
     icon: 'mdi-home',
     id: 0,
     component: Addcar,
+    visible: true,
+    user: true,
+    menu: true,
+    title: true,
+    meta: {
+      requiresAuth: false,
+    },
+    subMenu: [],
+  },
+  {
+    path: '/Detail',
+    name: 'Detail',
+    icon: 'mdi-home',
+    id: 0,
+    component: Detail,
+    visible: true,
+    user: true,
+    menu: true,
+    title: true,
+    meta: {
+      requiresAuth: false,
+    },
+    subMenu: [],
+  },
+  {
+    path: '/Login',
+    name: 'Login',
+    icon: 'mdi-home',
+    id: 0,
+    component: Login,
     visible: true,
     user: true,
     menu: true,

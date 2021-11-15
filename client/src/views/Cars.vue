@@ -1,4 +1,8 @@
 <template>
+<div>
+  <v-navigation-drawer  app>
+      <navigation-bar/>
+    </v-navigation-drawer >
   <div class="pa-4">
    
    <v-toolbar>
@@ -58,11 +62,16 @@
      </v-data-table>
     </div>
   </div>  
-
+</div>
 </template>
 <script>
+  import navigationBar from '../components/navigationBar.vue';
+
 
   export default {
+  components: {
+      navigationBar
+    },
    name:"Cars",
       data(){
       return{
@@ -86,13 +95,19 @@
             }
         },
         created(){
-          this.$http.get("car?filter=all")
-          .then((result) => {
-            this.localCars = result.body
-          })
-          .catch((error) => {
-            
-          });
+          if(localStorage.getItem('usuario')){
+              this.$http.get("car?filter=all")
+            .then((result) => {
+              this.localCars = result.body
+            })
+            .catch((error) => {
+              
+            });
+          }
+          else{
+            this.$router.push("/");
+          }
+          
         },
     methods: {
       newCar(){

@@ -14,8 +14,8 @@
         <v-list-item
           v-for="([icon, text, path], i) in items"
           :key="i"
-          link
-          :to="path"
+          @click="goTo(path)"
+          
         >
           <v-list-item-icon>
             <v-icon>{{ icon }}</v-icon>
@@ -36,11 +36,26 @@
   export default {
     data: () => ({
       items: [
-        ['mdi-email', 'Galería','/Gallery'],
-        ['mdi-email', 'Carros','/Cars'],
-        ['mdi-account-supervisor-circle', 'Pedidos','/Pedidos'],
+        ['mdi-car-estate', 'Carros','/Cars'],
+        ['mdi-logout','Cerrar Sesion','/logout'],
+        //['mdi-account-supervisor-circle', 'Pedidos','/Pedidos'],
       ],
     }),
+    methods:{
+      logout(){
+        localStorage.clear('usuario')
+        this.$router.push("/");
+      },
+      goTo(path){
+        if(path == '/logout'){
+          localStorage.clear('usuario')
+          this.$router.push("/");
+        }
+        else{
+          this.$router.push(path);
+        }
+      }
+    }
   }
 </script>
 

@@ -1,24 +1,12 @@
 <template>
-  <div >
-    <v-app-bar
-      color="deep-purple accent-4"
-      dark
-      dense
-    >
-
-      <v-toolbar-title>Tienda Virtual de Carros</v-toolbar-title>
-
-      <v-spacer></v-spacer>
-        
-      
-    </v-app-bar>
-    <v-navigation-drawer v-show="false" app>
-      <navigation-bar/>
-    </v-navigation-drawer >
+  <v-app>
+  
+    
     <v-content>
       <router-view/>
     </v-content>
-  </div>
+  
+  </v-app>
 </template>
 
 <script>
@@ -32,5 +20,19 @@ export default {
    components: {
     navigationBar,
   },
+  created(){
+
+  },
+  methods:{
+    goHome(){
+      this.$router.push("/");
+    },
+    goAdmin(){
+       this.$router.push("/addCar");
+    }
+  }
 };
 </script>
+<style scoped>
+
+</style>

@@ -1,13 +1,43 @@
-<template>
-<div style="display: flex; padding: 20px; justify-content: space-between;">
-    <div style="padding:20px" v-for="product in products" v-bind:key="product._id">
 		<template>
+      
+      <div>
+        
+    <v-app-bar
+      color="deep-purple accent-4"
+      dark
+      dense
+      
+    >
+    <v-btn color="red accent-4" @click="goHome()" ><v-icon>mdi-home</v-icon></v-btn>
+
+      <v-toolbar-title> &nbsp &nbsp Tienda Virtual de Carros</v-toolbar-title>
+
+      <v-spacer></v-spacer>
+        <v-btn color="red accent-4" @click="goAdmin()" >Administrador</v-btn>
+      <v-menu
+        left
+        bottom
+      >        
+      </v-menu>
+    </v-app-bar>
+        <br>
+        <v-container  >
+          <v-row align="center" justify="center">
+      <v-col><v-text-field
+            v-model="searchTerm"
+            filled
+            label="Buscar Auto"
+            clearable
+          ></v-text-field></v-col>
+   </v-row>
+        
+        </v-container>
+  <div style="display: flex; flex-wrap: wrap;">
+  <div style="padding:20px" v-for="product in filterByTerm" v-bind:key="product._id">
   <v-card
     class="mx-auto my-12"
     max-width="374"
   >
-
-
 	<v-img  class="imperial-image" :src="product.images[0]" alt="Imagen de la vela"></v-img>
 
     <v-card-title>{{product.maker}} {{product.model}}</v-card-title>
@@ -41,17 +71,19 @@
       <v-btn
         color="deep-purple lighten-2"
         text
-        @click="reserve"
+        @click="goToCar(product.id)"
       >
         Ver detalle
       </v-btn>
     </v-card-actions>
   </v-card>
-
-</template>
-	</div>
+</div>
+</div>
 </div>
 </template>
+	
+
+
 
 <script>
 
@@ -60,10 +92,28 @@
     name:"Cars",
        data(){
              return{
-                 products: []
+                 products: [],
+                 searchTerm: "" 
              }
          },
-
+      computed: {
+    filterByTerm() {
+      return this.products.filter(car => {
+        return car.maker.toLowerCase().includes(this.searchTerm);
+      });
+    },
+      },
+      methods:{
+        goToCar(id){
+          this.$router.push("/Detail?id="+id);
+        },
+        goHome(){
+      this.$router.push("/");
+    },
+    goAdmin(){
+       this.$router.push("/Login");
+    }
+      },
       async created(){
        this.products = await CarService.list()
                          .then( response => response.data)
@@ -71,3 +121,10 @@
      }
    }
 </script>
+
+<style scoped>
+.wrapper {
+  
+  justify-content: center;
+}
+</style>

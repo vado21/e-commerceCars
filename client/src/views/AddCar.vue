@@ -1,4 +1,8 @@
 <template>
+  <div>
+    <v-navigation-drawer  app>
+      <navigation-bar/>
+    </v-navigation-drawer >
   <div class="pa-4">
    
    <v-toolbar>
@@ -611,11 +615,13 @@
     <br>
    
   </div>  
-
+  </div>
 </template>
 <script>
   import { required, digits, email, max, regex } from 'vee-validate/dist/rules'
   import { extend, ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate'
+  import navigationBar from '../components/navigationBar.vue';
+
   setInteractionMode('eager')
   extend('required', {
     ...required,
@@ -625,6 +631,7 @@
   components: {
       ValidationProvider,
       ValidationObserver,
+      navigationBar
     },
    name:"Cars",
       data(){
@@ -686,6 +693,14 @@
             
           });
         },
+    created(){
+      if(localStorage.getItem('usuario')){
+        
+      }
+      else{
+        this.$router.push("/");
+      }
+    },
     methods: {
       submit () {
         this.$refs.observer.validate()
