@@ -5,6 +5,7 @@ import Gallery from '../views/Gallery.vue'
 import Addcar from '../views/AddCar.vue'
 import Detail from '../views/Detail.vue'
 import Login from '../views/Login.vue'
+import Pedidos from '../views/Pedidos.vue'
 
 Vue.use(VueRouter)
 
@@ -36,6 +37,21 @@ const routes = [
     title: true,
     meta: {
       requiresAuth: false,
+    },
+    subMenu: [],
+  },
+  {
+    path: '/pedidos',
+    name: 'Pedidos',
+    icon: 'mdi-account-supervisor-circle',
+    id: 0,
+    component: Pedidos,
+    visible: true,
+    user: true,
+    menu: true,
+    title: true,
+    meta: {
+      requiresAuth: true,
     },
     subMenu: [],
   },

@@ -37,8 +37,8 @@
     data: () => ({
       items: [
         ['mdi-car-estate', 'Carros','/Cars'],
-        ['mdi-logout','Cerrar Sesion','/logout'],
-        //['mdi-account-supervisor-circle', 'Pedidos','/Pedidos'],
+        ['mdi-account-supervisor-circle', 'Pedidos','/Pedidos'],
+        ['mdi-logout','Cerrar Sesion','/logout']
       ],
     }),
     methods:{
