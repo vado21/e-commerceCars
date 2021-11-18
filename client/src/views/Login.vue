@@ -89,7 +89,7 @@
       iniciarSesion(){
         if(this.email == "Admin123" && this.password == "password123"){
             localStorage.setItem('usuario', true);
-            this.$router.push("/AddCar");
+            this.$router.push("/Cars");
         }
         else{
           this.message = "Datos invalidos"

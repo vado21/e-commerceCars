@@ -114,10 +114,14 @@
        this.$router.push("/Login");
     }
       },
-      async created(){
-       this.products = await CarService.list()
-                         .then( response => response.data)
-                         .catch(err => console.error(err))
+       created(){
+        this.$http.get("car?filter=all")
+            .then((result) => {
+               this.products = result.body
+            })
+            .catch((error) => {
+              
+            });
      }
    }
 </script>
