@@ -7,7 +7,7 @@ import axios from 'axios'
 import VueResource from 'vue-resource'
 
 Vue.use(VueResource)
-const url = 'http://localhost:4000/';
+const url = 'http://6c10-2806-109f-13-3405-df0-d88a-f862-7db9.ngrok.io';
 Vue.http.options.root = url;
 Vue.prototype.$urls = url;
 

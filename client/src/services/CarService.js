@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:4000/';
+axios.defaults.baseURL = 'http://6c10-2806-109f-13-3405-df0-d88a-f862-7db9.ngrok.io';
 
 const valid_query_list = {
 	"car" : 1,

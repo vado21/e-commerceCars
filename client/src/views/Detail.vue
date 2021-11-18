@@ -180,6 +180,7 @@
             address: this.direccion,
             phone: this.telefono,
             email: this.email,
+            status: "new"
           }
           this.$http.post("reservation/",json)
           .then((result) => {
