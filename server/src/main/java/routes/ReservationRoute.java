@@ -4,6 +4,7 @@ import Repositories.ReservationRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import models.Car;
 import models.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import services.CacheDB;
+import services.CacheService;
+import services.LoggerSingleton;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -33,11 +37,20 @@ public class ReservationRoute implements RestEndpoint {
     
     @Autowired
     ReservationRepository repo;
-
+    
+    private static CacheDB<Reservation> cache = new CacheService<>();
+    private LoggerSingleton logger = new LoggerSingleton();
+    
     @Override
     @GetMapping("/reservation")
     public Object list(@RequestParam String filter) {
-         List<Reservation> result = new ArrayList<>();
+    List<Reservation> result = new ArrayList<>();
+         
+    if(!this.cache.isEmpty(filter)){
+        System.out.print("Using Cache");
+        return this.cache.getLastRequest(filter);
+    }
+    
     switch (filter) {
         case "new":
             result = repo.getNew(); 
@@ -49,12 +62,17 @@ public class ReservationRoute implements RestEndpoint {
             result = repo.findAll();
             break;
     }
+    this.cache.setCache(filter,result);
+    this.logger.write("Request for " + filter);
     return result;
     }
 
     @PostMapping("/reservation")
     public Object create(@RequestBody Reservation data){
         repo.save(data);
+        this.cache.deleteCache("new");
+        this.cache.deleteCache("complete");
+        this.logger.write("Create JSON" + data.toString());
         return new ResponseEntity(HttpStatus.CREATED);
     }
     
@@ -62,8 +80,10 @@ public class ReservationRoute implements RestEndpoint {
     @DeleteMapping("/reservation/{id}")
     public Object delete(@PathVariable String id) {
         repo.deleteById(id);
+        this.cache.deleteCache("new");
+        this.cache.deleteCache("complete");
+        this.logger.write("Deletion Reservation " + id);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
-
     }
 
     @Override
