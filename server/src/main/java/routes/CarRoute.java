@@ -24,6 +24,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import services.CacheDB;
+import services.CacheService;
+import services.Log;
+import services.LoggerSingleton;
 
 /**
  *
@@ -36,10 +40,18 @@ public class CarRoute implements RestEndpoint {
 
     @Autowired
     CarRepository repo;
+    
+    
+    private static CacheDB<Car> cache = new CacheService<>();
+    private LoggerSingleton logger = new LoggerSingleton();
 
     @Override
     @GetMapping("/car")
     public Object list(@RequestParam String filter) {
+        
+    if(!this.cache.isEmpty(filter)){
+        return this.cache.getLastRequest(filter);
+    }
     
      List<Car> result = new ArrayList<>();
     switch (filter) {
@@ -59,30 +71,45 @@ public class CarRoute implements RestEndpoint {
             result = repo.findAll();
             break;
     }
+    
+    this.cache.setCache(filter,result);
+    this.logger.write("Request for " + filter);
     return result;
     }
 
     @PostMapping("/car")
     public Object create(@RequestBody Car car) {
         repo.save(car);
+        this.cache.deleteCache("car");
+        this.logger.write("Create JSON" + car.toString());
+
         return new ResponseEntity(HttpStatus.CREATED);
     }
     
     @PostMapping("/luxury")
     public Object create(@RequestBody Luxury car) {
         repo.save(car);
+        this.cache.deleteCache("luxury");
+        this.logger.write("Create JSON" + car.toString());
+
         return new ResponseEntity(HttpStatus.CREATED);
     }
     
     @PostMapping("/commercial")
     public Object create(@RequestBody Commercial car) {
         repo.save(car);
+        this.cache.deleteCache("commercial");
+        this.logger.write("Create JSON" + car.toString());
+
         return new ResponseEntity(HttpStatus.CREATED);
     }
     
     @PostMapping("/armored")
     public Object create(@RequestBody Armored car) {
         repo.save(car);
+        this.cache.deleteCache("armored");
+        this.logger.write("Create JSON" + car.toString());
+
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
@@ -90,6 +117,11 @@ public class CarRoute implements RestEndpoint {
     @DeleteMapping("/car/{id}")
     public Object delete(@PathVariable String id) {
         repo.deleteById(id);
+        this.cache.deleteCache("car");
+        this.cache.deleteCache("luxury");
+        this.cache.deleteCache("commercial");
+        this.cache.deleteCache("armored");
+
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
