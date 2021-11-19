@@ -44,6 +44,23 @@
      <div class="my-4 text-subtitle-1">
        Marca: {{car.maker}} 
       </div>
+      <div class="my-4 text-subtitle-1">
+       Escoge color:
+       <select name="select">
+        <option value="value1">Rojo</option>
+        <option value="value2" selected>Azul</option>
+        <option value="value3">Negro</option>
+      </select>
+      </div>
+            <div class="my-4 text-subtitle-1">
+       Financiamiento:
+       <select name="select">
+        <option value="value1">72 meses</option>
+        <option value="value2" selected>48 meses</option>
+        <option value="value3">36 meses</option>
+      </select>
+      </div>
+    
     
 
     <v-img  class="imperial-image" :src="car.images[0]" alt="Imagen de la vela"></v-img>
